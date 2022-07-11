@@ -1,0 +1,70 @@
+@layout('layout')
+
+@section('content')
+
+
+
+  <div class="m-auto space-y-8 md:w-8/12 lg:">
+    <div
+      class="rounded-xl border bg-opacity-50 backdrop-blur-2xl bg-white shadow-xl">
+
+      <div class="p-6 sm:p-16">
+        <h2
+          class="mb-8 text-2xl text-cyan-900 font-bold">
+          Enter your informations</h2>
+        <form action="{{route('download')}}" method="post" class="space-y-8">
+          <div class="space-y-2">
+            <label for="email"
+                   class="text-gray-700">Email</label>
+            <input type="email" name="email"
+                   id="email"
+                   class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+    focus:ring-2 focus:ring-sky-300 focus:outline-none
+    invalid:ring-2 invalid:ring-red-400"
+            >
+          </div>
+
+          <div>
+            <div
+              class="flex items-center justify-between">
+              <label for="password"
+                     class="text-gray-700">Password</label>
+
+            </div>
+            <input type="password" name="password"
+                   id="password"
+                   class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+                                        focus:ring-2 focus:ring-sky-300 focus:outline-none
+                                        invalid:ring-2 invalid:ring-red-400"
+            >
+          </div>
+
+          <div class="space-y-2">
+            <label for="links"
+                   class="text-gray-700">links</label>
+            <input type="text" name="links"
+                   id="links"
+                   class="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+    focus:ring-2 focus:ring-sky-300 focus:outline-none
+    invalid:ring-2 invalid:ring-red-400"
+            >
+          </div>
+
+          <button type="submit"
+                  class="w-full py-3 px-6 rounded-md bg-indigo-200
+                                    focus:bg-sky-700 active:bg-indigo-200">
+                <span
+                  class="text-black">Continue</span>
+          </button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+@endsection
+
+
+
+
