@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Symfony cast tuto downloader</title>
+  <link
+    href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+    rel="stylesheet">
+</head>
+<body>
+<noscript>You need to enable JavaScript to run
+  this app.
+</noscript>
+
+{{--<script type="module">--}}
+{{--  import {--}}
+{{--    io--}}
+{{--  } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";--}}
+
+{{--  const socket = io();--}}
+
+{{--  socket.emit("download:ready", () => {--}}
+{{--    console.log("the socket id is ", socket.id);--}}
+{{--  });--}}
+
+
+{{--  socket.on("download:status", (data) => {--}}
+{{--    console.log(data);--}}
+{{--  });--}}
+
+
+{{--</script>--}}
+
+<div class="relative py-16
+                before:absolute before:inset-0 before:w-full before:h-[50%] before:bg-gray-200">
+  <div
+    class="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
+
+
+    <div id="root"></div>
+
+
+  </div>
+</div>
+<script src="/js/index.js"></script>
+</body>
+</html>

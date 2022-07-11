@@ -19,6 +19,16 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import {
+  HttpContextContract
+} from '@ioc:Adonis/Core/HttpContext'
 
-Route.get('/', 'IndexController.index')
-Route.post('/download', 'IndexController.download').as('download')
+Route.group(() => {
+  Route.post('/start-downloading', 'IndexController.download')
+}).prefix('/api')
+
+Route.get('*', async ({view}: HttpContextContract) => {
+  return view.render('index')
+}).as('not_found')
+
+// Route.get('/', 'IndexController.index')

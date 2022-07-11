@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js"
+    "start": "node build/server.js",
+    "server": "node ace serve --watch",
+    "client": "node ace mix:watch",
+    "build": "yarn client:build && yarn server:build",
+    "server:build": "node ace build --production",
+    "client:build": "node ace mix:build --production",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.8.0",
@@ -24,15 +28,28 @@
     "@adonisjs/session": "^6.4.0",
     "@adonisjs/shield": "^7.0.11",
     "@adonisjs/view": "^6.1.6",
+    "@babel/preset-react": "^7.18.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "adonis-mix-asset": "^3.0.0",
+    "babel-loader": "^8.2.5",
+    "concurrently": "^7.2.2",
+    "crypto-browserify": "^3.12.0",
     "laravel-mix": "^6.0.49",
     "luxon": "^3.0.1",
+    "net": "^1.0.2",
     "proxy-addr": "^2.0.7",
     "puppeteer": "^15.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-refresh": "^0.14.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",
     "source-map-support": "^0.5.21",
-    "sqlite3": "^5.0.8"
+    "sqlite3": "^5.0.8",
+    "webpack": "^5.73.0",
+    "websocket-client": "^1.0.0"
   }
 }

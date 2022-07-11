@@ -1,6 +1,7 @@
 import Ws from "App/Services/Ws";
 
 const puppeteer = require("puppeteer");
+
 const path = require("path");
 
 import {Socket} from "socket.io";
@@ -10,7 +11,7 @@ class DownloaderService {
   private path: string;
   private socket: Socket;
 
-  constructor() {
+  constructor(email, password, link) {
     this.tutorials = []
     this.path = ""
     Ws.boot()
@@ -18,16 +19,18 @@ class DownloaderService {
     Ws.on('download:ready', async (socket: Socket) => {
       this.socket = socket
       await this.handleEmit('download init')
+      await this.webLaunch(email, password, link, true)
     })
   }
 
-  async handleEmit(data) {
+  handleEmit = async (data) => {
+    console.log(data);
     this.socket.emit('download:status', {
       data: data
     })
   }
 
-  async webLaunch(username, password, link, headless = false) {
+  async webLaunch(username, password, link, headless = true) {
 
     this.tutorials = link.split(",")
 
@@ -90,7 +93,7 @@ class DownloaderService {
           await new Promise(res => {
             setTimeout(res, 3000);
           });
-          console.log("start downloading");
+          console.log("start downloading video");
           await this.handleEmit({state})
           // await this.progression.merge({progression: state}).save()
           if (index === list.length - 1) {
