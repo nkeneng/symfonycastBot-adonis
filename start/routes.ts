@@ -24,7 +24,8 @@ import {
 } from '@ioc:Adonis/Core/HttpContext'
 
 Route.group(() => {
-  Route.post('/start-downloading', 'IndexController.download')
+  Route.post('/start-downloading', 'IndexController.generate')
+  Route.get('/download-result', 'IndexController.download')
 }).prefix('/api')
 
 Route.get('*', async ({view}: HttpContextContract) => {

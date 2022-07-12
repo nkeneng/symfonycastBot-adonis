@@ -10,23 +10,26 @@ class DownloaderService {
   private tutorials: string[];
   private path: string;
   private socket: Socket;
+  private ip: string;
 
-  constructor(email, password, link) {
+  constructor(email, password, link, ip) {
     this.tutorials = []
     this.path = ""
+    this.ip = ip
     Ws.boot()
 
     Ws.on('download:ready', async (socket: Socket) => {
       this.socket = socket
-      await this.handleEmit('download init')
       await this.webLaunch(email, password, link, true)
     })
   }
 
-  handleEmit = async (data) => {
-    console.log(data);
+  handleEmit = async (status = 0, finished = false, message = "") => {
+    console.log(status);
     this.socket.emit('download:status', {
-      data: data
+      state: status,
+      finished: finished,
+      message: message
     })
   }
 
@@ -79,33 +82,33 @@ class DownloaderService {
         const response = await lessonPage.waitForResponse(response =>
           response
         );
-        console.log(response.status());
-        console.log(response);
-        console.log(response.statusCode);
+
         if (response.status() !== 202 && response.status() !== 200) {
           console.log("An error occurred while downloading with status ", response.status());
           if (trial >= 5) {
-            await this.handleEmit('downloading broken')
+            await this.handleEmit(0,
+              false,
+              "An error occurred while downloading"
+            )
             break;
           }
           trial++;
         } else {
+
           await new Promise(res => {
             setTimeout(res, 3000);
           });
+
           console.log("start downloading video");
-          await this.handleEmit({state})
-          // await this.progression.merge({progression: state}).save()
+
+          await this.handleEmit(state, false, "")
+
           if (index === list.length - 1) {
-            await this.handleEmit({
-              state,
-              finished: true
-            })
-            // await this.progression.merge({
-            //   progression: state,
-            //   finished: true
-            // }).save()
+            await this.handleEmit(
+              state, true, ""
+            )
           }
+
         }
         await lessonPage.close()
       }
@@ -123,7 +126,7 @@ class DownloaderService {
 
       let urlArray = element.split("/")
 
-      this.path = path.resolve(`./download/${urlArray[urlArray.length - 1]}`)
+      this.path = path.resolve(`./download/${this.ip}/${urlArray[urlArray.length - 1]}`)
 
       client = await tutoPage.target().createCDPSession()
 

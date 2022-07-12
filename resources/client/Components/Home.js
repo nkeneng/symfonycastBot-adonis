@@ -28,9 +28,9 @@ const Home = () => {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        email,
-        password,
-        links
+        email:"nkeneng.junior@gmail.com",
+        password:"rydSaw-6mefbe-bogdiv",
+        links:"https://symfonycasts.com/screencast/turbo"
       })
     };
     console.log(requestOptions);
